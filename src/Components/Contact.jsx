@@ -56,7 +56,17 @@ function Contact() {
   };
 
   return (
-    <section id="contact" className="py-20 bg-white px-6">
+    <section id="contact" className="py-20 bg-white px-6 relative">
+      {/* Fullscreen Blur Loading Overlay */}
+      {loading && (
+        <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/30 backdrop-blur-md transition-all">
+          <div className="w-12 h-12 border-4 border-white border-t-emerald-500 rounded-full animate-spin mb-4"></div>
+          <p className="text-white font-semibold text-lg tracking-wide">
+            Sending Message...
+          </p>
+        </div>
+      )}
+
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">

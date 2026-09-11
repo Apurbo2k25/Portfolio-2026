@@ -1,5 +1,7 @@
 import { Contact } from "../model/formSchema.js";
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export const sendMessage = async (req, res) => {
   try {
@@ -11,28 +13,18 @@ export const sendMessage = async (req, res) => {
         .json({ success: false, message: "All fields are required." });
     }
 
-    // 1. Save message to MongoDB
+    // 1. Save to MongoDB
     const newMessage = await Contact.create({ name, email, message });
 
-    // 2. Configure Transporter
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-    });
-
-    // 3. Await email dispatch before completing request
-    await transporter.sendMail({
-      from: process.env.EMAIL_USER,
+    // 2. Send Email via Resend API (Fast HTTP Request)
+    await resend.emails.send({
+      from: "Portfolio <onboarding@resend.dev>",
       to: process.env.EMAIL_USER,
       replyTo: email,
       subject: `New Portfolio Message from ${name}`,
       text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
     });
 
-    // 4. Return success response
     return res.status(201).json({
       success: true,
       message: "Message sent successfully!",
