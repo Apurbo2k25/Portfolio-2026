@@ -68,19 +68,25 @@ function Journey() {
         <div className="relative border-l-2 border-emerald-500 ml-4 md:ml-32 space-y-12">
           {milestones.map((item, index) => (
             <div key={index} className="relative pl-8 md:pl-10">
-              {/* Timeline Icon Node */}
-              <div className="absolute -left[17px] top-1.5 w-8 h-8 rounded-full bg-white border-2 border-emerald-600 flex items-center justify-center shadow-md">
+              {/* Timeline Icon Node (Fixed -left-[17px] syntax) */}
+              <div className="absolute -left-[17px] top-1.5 w-8 h-8 rounded-full bg-white border-2 border-emerald-600 flex items-center justify-center shadow-md z-10">
                 {item.icon}
               </div>
 
-              {/* Date Box (Desktop Offset) */}
-              <div className="md:absolute md:-left-36 md:top-2 mb-2 md:mb-0 text-xs font-semibold text-gray-500 flex items-center gap-1">
+              {/* Desktop Date Box (Hidden on Mobile to prevent overlap) */}
+              <div className="hidden md:flex absolute -left-36 top-2 text-xs font-semibold text-gray-500 items-center gap-1 w-28 justify-end">
                 <FaCalendarAlt className="text-emerald-600" />
                 {item.year}
               </div>
 
               {/* Card Content */}
-              <div className="bg-white p-6 rounded-xl border border-emerald-600 shadow-sm hover:shadow-md transition">
+              <div className="bg-white p-6  rounded-xl border-r-2 border-l-2 md:border border-emerald-600 shadow-sm hover:shadow-md transition">
+                {/* Mobile Date Display (Visible only on mobile inside card header) */}
+                <div className="flex md:hidden items-center gap-1.5 text-xs font-semibold text-emerald-600 mb-2">
+                  <FaCalendarAlt />
+                  <span>{item.year}</span>
+                </div>
+
                 <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
                   <h3 className="text-xl font-bold text-gray-800">
                     {item.title}
@@ -107,7 +113,7 @@ function Journey() {
         {/* Bottom Call to Action */}
         <div className="mt-16 text-center">
           <Link
-            to="#"
+            to="/#contact"
             className="inline-block bg-emerald-600 text-white font-medium px-6 py-3 rounded-lg hover:bg-emerald-700 transition"
           >
             Connect With Me →
