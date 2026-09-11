@@ -104,19 +104,20 @@ function Navbar() {
           >
             Skills
           </button>
-          <Link
-            to="/journey"
-            onClick={() => setIsOpen(false)}
-            className="hover:text-emerald-600 transition"
-          >
-            Journey
-          </Link>
+
           <button
             onClick={() => handleScroll("contact")}
-            className="bg-emerald-600 text-white py-2 rounded-lg hover:bg-emerald-700 transition"
+            className="hover:text-emerald-600 transition"
           >
             Contact
           </button>
+          <Link
+            to="/journey"
+            onClick={() => setIsOpen(false)}
+            className="bg-emerald-600 text-white py-2 rounded-lg hover:bg-emerald-700 transition"
+          >
+            Journey
+          </Link>
         </div>
       )}
     </nav>
