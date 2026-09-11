@@ -2,8 +2,11 @@ import { Contact } from "../model/formSchema.js";
 import nodemailer from "nodemailer";
 
 export const sendMessage = async (req, res) => {
+  console.log("Contact request received");
+
   try {
     const { name, email, message } = req.body;
+    console.log("Saving message to MongoDB");
 
     if (!name || !email || !message) {
       return res
@@ -13,6 +16,7 @@ export const sendMessage = async (req, res) => {
 
     // Save to MongoDB
     const newMessage = await Contact.create({ name, email, message });
+    console.log("Message saved. Sending email");
 
     // Send email using Nodemailer
     const transporter = nodemailer.createTransport({
@@ -33,6 +37,7 @@ export const sendMessage = async (req, res) => {
       subject: `New Portfolio Message from ${name}`,
       text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
     });
+    console.log("Email sent successfully");
 
     res.status(201).json({
       success: true,
