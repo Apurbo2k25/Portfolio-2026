@@ -1,8 +1,6 @@
 import { Contact } from "../model/formSchema.js";
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export const sendMessage = async (req, res) => {
   try {
     const { name, email, message } = req.body;
@@ -16,7 +14,10 @@ export const sendMessage = async (req, res) => {
     // 1. Save to MongoDB
     const newMessage = await Contact.create({ name, email, message });
 
-    // 2. Send Email via Resend API (Fast HTTP Request)
+    // 2. Initialize Resend inside the function
+    const resend = new Resend(process.env.RESEND_API_KEY);
+
+    // 3. Send Email via Resend API
     await resend.emails.send({
       from: "Portfolio <onboarding@resend.dev>",
       to: process.env.EMAIL_USER,
