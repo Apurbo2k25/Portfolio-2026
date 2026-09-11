@@ -192,7 +192,7 @@ function Skills() {
           <div className="bg-white p-5 rounded-xl border border-r-5 border-l-5 border-emerald-600 shadow-sm">
             <h3 className="text-lg font-bold text-gray-800 mb-4 pb-2 border-b border-gray-100 flex items-center justify-between">
               AI & GenAI
-              <h1 className="text-sm  bg-green-100 text-green-700 px-2 py-1 rounded-full font-medium flex items-center gap-1">
+              <span className="text-sm  bg-green-100 text-green-700 px-2 py-1 rounded-full font-medium flex items-center gap-1">
                 <span>Loading</span>
                 <span className="flex gap-0.5 ml-1">
                   <span className="animate-bounce [animation-delay:-0.3s]">
@@ -203,7 +203,7 @@ function Skills() {
                   </span>
                   <span className="animate-bounce">.</span>
                 </span>
-              </h1>
+              </span>
             </h3>
             <div className="grid grid-cols-3 gap-3">
               {aiSkills.map((skill) => (
