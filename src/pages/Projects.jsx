@@ -28,8 +28,8 @@ function Projects() {
       description:
         "A fast, single-component full-stack task manager featuring full CRUD operations, inline record editing, and RESTful API integration.",
       tech: ["React", "Express", "MongoDB", "Tailwind CSS"],
-      github: "https://github.com",
-      demo: "https://example.com",
+      github: "https://github.com/Apurbo2k25/Task-Manager",
+      demo: "https://taskifyhq.netlify.app/",
     },
   ];
 
